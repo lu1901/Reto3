@@ -43,8 +43,8 @@ public class GameService {
                 if(g.getDeveloper()!=null){
                     q.get().setDeveloper(g.getDeveloper());
                 }
-                if(g.getYear()!=null){
-                    q.get().setYear(g.getYear());
+                if(g.getYears()!=null){
+                    q.get().setYears(g.getYears());
                 }
                 if(g.getDescription()!=null){
                     q.get().setDescription(g.getDescription());
