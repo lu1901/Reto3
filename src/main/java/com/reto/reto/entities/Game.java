@@ -15,7 +15,8 @@ public class Game implements Serializable {
     private Integer id;
     private String name;
     private String developer;
-    private Integer years;
+    @Column (name = "`year`")
+    private Integer year;
     private String description;
 
     @ManyToOne
@@ -57,12 +58,12 @@ public class Game implements Serializable {
         this.developer = developer;
     }
 
-    public Integer getYears() {
-        return years;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setYears(Integer years) {
-        this.years = years;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getDescription() {
