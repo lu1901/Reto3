@@ -52,12 +52,6 @@ public class GameService {
                 if(g.getCategory()!=null){
                     q.get().setCategory(g.getCategory());
                 }
-                if(g.getMessages()!=null){
-                    q.get().setMessages(g.getMessages());
-                }
-                if(g.getReservations()!=null){
-                    q.get().setReservations(g.getReservations());
-                }
                 gameRepository.save(q.get());
                 return q.get();
             }else{
@@ -68,14 +62,11 @@ public class GameService {
         }
     }
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Game>g= gameRepository.getGame(id);
-        if(g.isPresent()){
-            gameRepository.delete(g.get());
-            flag=true;
-        }
-        return flag;
-
+        Boolean d = getGame(id).map(g -> {
+            gameRepository.delete(g);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 

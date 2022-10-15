@@ -18,7 +18,7 @@ public class CategoryService {
 
         return categoryRepository.getAll();
     }
-    public Optional<Category> getLibrary(int id){
+    public Optional<Category> getCategory(int id){
         return categoryRepository.getCategory(id);
     }
     public Category save(Category c){
@@ -43,9 +43,6 @@ public class CategoryService {
                 if(c.getDescription()!=null){
                     q.get().setDescription(c.getDescription());
                 }
-                if(c.getGames()!=null){
-                    q.get().setGames(c.getGames());
-                }
                 categoryRepository.save(q.get());
                 return q.get();
             }else{
@@ -56,14 +53,11 @@ public class CategoryService {
         }
     }
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Category>g= categoryRepository.getCategory(id);
-        if(g.isPresent()){
-            categoryRepository.delete(g.get());
-            flag=true;
-        }
-        return flag;
-
+        Boolean d = getCategory(id).map(c -> {
+            categoryRepository.delete(c);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 

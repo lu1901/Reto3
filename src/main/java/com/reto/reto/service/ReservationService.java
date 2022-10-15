@@ -46,15 +46,6 @@ public class ReservationService {
                 if(r.getStatus()!=null){
                     q.get().setStatus(r.getStatus());
                 }
-                if(r.getGame()!=null){
-                    q.get().setGame(r.getGame());
-                }
-                if(r.getClient()!=null){
-                    q.get().setClient(r.getClient());
-                }
-                if(r.getScore()!=null){
-                    q.get().setScore(r.getScore());
-                }
                 reservationRepository.save(q.get());
                 return q.get();
             }else{
@@ -65,14 +56,11 @@ public class ReservationService {
         }
     }
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Reservation>g= reservationRepository.getReservation(id);
-        if(g.isPresent()){
-            reservationRepository.delete(g.get());
-            flag=true;
-        }
-        return flag;
-
+        Boolean d = getReservation(id).map(r -> {
+            reservationRepository.delete(r);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 

@@ -48,12 +48,6 @@ public class ClientService {
                 if(c.getAge()!=null){
                     q.get().setAge(c.getAge());
                 }
-                if(c.getMessages()!=null){
-                    q.get().setMessages(c.getMessages());
-                }
-                if(c.getReservations()!=null){
-                    q.get().setReservations(c.getReservations());
-                }
                 clientRepository.save(q.get());
                 return q.get();
             }else{
@@ -64,14 +58,11 @@ public class ClientService {
         }
     }
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Client>c= clientRepository.getClient(id);
-        if(c.isPresent()){
-            clientRepository.delete(c.get());
-            flag=true;
-        }
-        return flag;
-
+        Boolean d = getClient(id).map(c -> {
+            clientRepository.delete(c);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 

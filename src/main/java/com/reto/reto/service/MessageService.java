@@ -40,12 +40,6 @@ public class MessageService {
                 if(m.getMessageText()!=null){
                     q.get().setMessageText(m.getMessageText());
                 }
-                if(m.getGame()!=null){
-                    q.get().setGame(m.getGame());
-                }
-                if(m.getClient()!=null){
-                    q.get().setClient(m.getClient());
-                }
                 messageRepository.save(q.get());
                 return q.get();
             }else{
@@ -56,14 +50,11 @@ public class MessageService {
         }
     }
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Message>g= messageRepository.getMessage(id);
-        if(g.isPresent()){
-            messageRepository.delete(g.get());
-            flag=true;
-        }
-        return flag;
-
+        Boolean d = getMessage(id).map(m -> {
+            messageRepository.delete(m);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 
