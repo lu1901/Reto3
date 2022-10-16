@@ -19,6 +19,7 @@ public class Game implements Serializable {
     private Integer year;
     private String description;
 
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("games")
